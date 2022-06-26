@@ -1,0 +1,93 @@
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container">
+    <div class="row" *ngIf="login">
+        <div class="col-md-4"></div>
+        <form class="col-md-4" #inputNameForm="ngForm" (ngSubmit)="onSubmit()">
+            <div style="margin-bottom: 10px;">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="fullName" class="form-control" aria-describedby="emailHelp" [(ngModel)]="chatModel.fullName" placeholder="Input your Full Name . . .">
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label class="form-label">Call Name</label>
+                <input type="text" name="callName" class="form-control" [(ngModel)]="chatModel.callName" placeholder="Input your Call Name . . .">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row" *ngIf="!login">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                </div>
+            <div class="panel-collapse" id="collapseOne">
+                <div class="panel-body">
+                    <ul class="chat" *ngFor="let value of message">
+                        <li class="left clearfix" *ngIf="value.name != chatModel.callName">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{ value.fullName }} ({{ value.name }})</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>{{ value.time }}</small>
+                                </div>
+                                <p>
+                                    {{ value.text }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix" *ngIf="value.name == chatModel.callName">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{ value.time }}</small>
+                                    <strong class="pull-right primary-font">{{ value.fullName }} ({{ value.name }})</strong>
+                                </div>
+                                <p class="pull-right">
+                                    {{ value.text }}
+                                </p>
+                            </div>
+                        </li>
+                        <!-- <li class="left clearfix">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                    dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                </div>
+                                <p class="pull-right">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                    dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <form #inputChatForm="ngForm" (ngSubmit)="onSubmitChat()">
+                        <div class="input-group">
+                            <input id="btn-input" name="chat" type="text" class="form-control input-sm" placeholder="Type your message here..." [(ngModel)]="chatting" [ngModelOptions]="{standalone: true}" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" type="submit" id="btn-chat">
+                                    Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
