@@ -9,7 +9,7 @@ import { Chat } from '../chat';
 })
 export class ChatComponent implements OnInit {
 
-  socket = io('http://172.104.35.202:3001');
+  socket = io('https://test-ws.bonbon.co.id');
   message: any;
   messageArray = [];
   login: boolean = true;
